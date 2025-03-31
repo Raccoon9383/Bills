@@ -103,4 +103,60 @@ button:hover {
 .person-entry-name {
   min-width: 100px;
   font-weight: 500;
+}
+
+.selection-area {
+  display: grid;
+  gap: 16px;
+}
+
+.person-row {
+  display: grid;
+  gap: 8px;
+  align-items: center;
+}
+
+.person-name {
+  font-weight: bold;
+  min-width: 100px;
+}
+
+.inputs-container {
+  display: grid;
+  gap: 8px;
+}
+
+.input-wrapper {
+  width: 100%;
+}
+
+.input-wrapper input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-wrapper label {
+  display: block;
+  margin-bottom: 4px;
+}
+
+@media (min-width: 768px) {
+  .person-row {
+    grid-template-columns: 100px 1fr;
+  }
+  
+  .inputs-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .person-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .inputs-container {
+    grid-template-columns: 1fr;
+  }
 } 

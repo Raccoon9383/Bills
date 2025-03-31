@@ -78,13 +78,32 @@ function renderSelectionArea() {
   document.getElementById("selectionSection").style.display = "block";
   const area = document.getElementById("selectionArea");
   area.innerHTML = "";
+  area.className = "selection-area";
+
+  // 이름 라벨을 위한 최소 너비 설정
+  const nameWidth = Math.max(...people.map((p) => p.name.length)) + "em";
+  document.documentElement.style.setProperty("--name-width", nameWidth);
+
   people.forEach((person, pIdx) => {
     const row = document.createElement("div");
     row.className = "person-row";
+
     const nameLabel = document.createElement("label");
     nameLabel.textContent = person.name;
+    nameLabel.className = "person-name";
     row.appendChild(nameLabel);
+
+    const inputsContainer = document.createElement("div");
+    inputsContainer.className = "inputs-container";
+
     items.forEach((item, iIdx) => {
+      const inputWrapper = document.createElement("div");
+      inputWrapper.className = "input-wrapper";
+
+      //   const itemLabel = document.createElement("label");
+      //   itemLabel.textContent = item.name;
+      //   inputWrapper.appendChild(itemLabel);
+
       const input = document.createElement("input");
       input.type = "number";
       input.min = "0";
@@ -94,8 +113,12 @@ function renderSelectionArea() {
         if (!isNaN(val) && val > 0) person.consumed[item.name] = val;
         else delete person.consumed[item.name];
       };
-      row.appendChild(input);
+      inputWrapper.appendChild(input);
+
+      inputsContainer.appendChild(inputWrapper);
     });
+
+    row.appendChild(inputsContainer);
     area.appendChild(row);
   });
 }
