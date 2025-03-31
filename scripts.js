@@ -126,6 +126,9 @@ function renderSelectionArea() {
 }
 
 function toFraction(numerator, denominator) {
+  if (numerator === denominator) {
+    return ''
+  }
   return numerator + "/" + denominator;
 }
 
@@ -159,7 +162,7 @@ function calculate() {
       totals[consumer.name] += personShare;
       calculatedTotal += personShare;
       const fraction = toFraction(consumer.qty, totalConsumedQty);
-      consumedItems[consumer.name].push(`${item.name} x${fraction}`);
+      consumedItems[consumer.name].push(`${item.name}${fraction === '' ? '' : ' x '}${fraction}`);
     }
   }
   const receiptTotal = items.reduce(
@@ -177,9 +180,9 @@ function calculate() {
       `${name}: ₩${formatNumber(Math.round(totals[name]))} (${itemsList})`
     );
   }
-  resultLines.push("\n👥 항목별 참여자 목록");
+  resultLines.push("\n👥 항목별 인원");
   for (const item in itemConsumers) {
-    resultLines.push(`${item}: (${itemConsumers[item].join(", ")})`);
+    resultLines.push(`${item}: ${itemConsumers[item].join(", ")}`);
   }
   document.getElementById("results").textContent = resultLines.join("\n");
 }
