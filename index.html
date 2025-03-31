@@ -7,6 +7,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2301@1.0/SUIT.css" rel="stylesheet">
   <style>
+    .person-entry {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.person-entry-name {
+  min-width: 100px;
+  font-weight: 500;
+}
+
     body {
       font-family: 'Outfit', 'SUIT', sans-serif;
       background: linear-gradient(to bottom right, #e8f0ff, #fdfdfd);
@@ -176,11 +187,15 @@
     }
 
     function updatePersonList() {
-      const list = document.getElementById('personList');
-      list.innerHTML = people.map((p, i) =>
-        `• ${p.name} <button class="remove-btn" onclick="removePerson(${i})">×</button>`
-      ).join('<br>');
-    }
+  const list = document.getElementById('personList');
+  list.innerHTML = people.map((p, i) =>
+    `<div class="person-entry">
+       <span class="person-entry-name">• ${p.name}</span>
+       <button class="remove-btn" onclick="removePerson(${i})">×</button>
+     </div>`
+  ).join('');
+}
+
 
     function renderSelectionArea() {
       if (people.length === 0 || items.length === 0) return;
