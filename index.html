@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>정산닷옭</title>
+  <title>SplitMate</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -120,10 +120,10 @@
   </style>
 </head>
 <body>
-  <h2>정산닷옭</h2>
+  <h2>SplitMate</h2>
 
   <div class="section">
-    <label>📦 1단계: 영수증 입력 (항목별 수량 & 단가)</label><br>
+    <label>📦 1단계: 영수증 항목 입력</label><br>
     <input type="text" id="itemName" placeholder="항목명 (예: 치킨, 소주)">
     <input type="number" id="itemCount" placeholder="수량">
     <input type="number" id="itemPrice" placeholder="개당 가격">
@@ -152,6 +152,10 @@
   <script>
     const items = [];
     const people = [];
+
+    function formatNumber(num) {
+      return num.toLocaleString('ko-KR');
+    }
 
     function addItem() {
       const name = document.getElementById('itemName').value;
@@ -226,8 +230,8 @@
       });
     }
 
-    function formatNumber(num) {
-      return num.toLocaleString('ko-KR');
+    function toFraction(numerator, denominator) {
+      return numerator + '/' + denominator;
     }
 
     function calculate() {
@@ -236,6 +240,7 @@
 
       const totals = {};
       const consumedItems = {};
+      const itemConsumers = {};
       people.forEach(p => {
         totals[p.name] = 0;
         consumedItems[p.name] = [];
@@ -243,6 +248,8 @@
           if (!itemMap[itemName]) continue;
           itemMap[itemName].consumerList.push({ name: p.name, qty });
           itemMap[itemName].totalQty += qty;
+          if (!itemConsumers[itemName]) itemConsumers[itemName] = [];
+          itemConsumers[itemName].push(p.name);
         }
       });
 
@@ -257,7 +264,8 @@
           const personShare = unitShare * consumer.qty;
           totals[consumer.name] += personShare;
           calculatedTotal += personShare;
-          consumedItems[consumer.name].push(`${item.name} x${consumer.qty}`);
+          const fraction = toFraction(consumer.qty, totalConsumedQty);
+          consumedItems[consumer.name].push(`${item.name} x${fraction}`);
         }
       }
 
@@ -267,6 +275,11 @@
       for (const name in totals) {
         const itemsList = consumedItems[name].join(', ');
         resultLines.push(`${name}: ₩${formatNumber(Math.round(totals[name]))} (${itemsList})`);
+      }
+
+      resultLines.push('\n👥 항목별 참여자 목록');
+      for (const item in itemConsumers) {
+        resultLines.push(`${item}: (${itemConsumers[item].join(', ')})`);
       }
 
       document.getElementById('results').textContent = resultLines.join('\n');
