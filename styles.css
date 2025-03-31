@@ -57,6 +57,14 @@ button:hover {
   background-color: #002c63;
 }
 
+.section-title {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: #003c83;
+  margin-bottom: 16px;
+}
+
 .remove-btn {
   background: none;
   border: 1px solid #ccc;
@@ -90,8 +98,29 @@ button:hover {
 }
 
 .item {
-  font-size: 1rem;
-  margin: 5px 0;
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 10px;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.item-name {
+  font-weight: 500;
+}
+
+.item-count, .item-price {
+  color: #555;
+  text-align: right;
+}
+
+.item .remove-btn {
+  justify-self: end;
 }
 
 .person-entry {
@@ -107,56 +136,74 @@ button:hover {
 
 .selection-area {
   display: grid;
+  grid-template-columns: repeat(auto-fill, 80px);
   gap: 16px;
+  margin-bottom: 16px;
 }
 
 .person-row {
   display: grid;
-  gap: 8px;
-  align-items: center;
+  align-items: start;
+  min-width: 50px;
 }
 
 .person-name {
   font-weight: bold;
-  min-width: 100px;
+  min-width: 50px;
 }
 
 .inputs-container {
   display: grid;
-  gap: 8px;
+  gap: 4px;
 }
 
 .input-wrapper {
   width: 100%;
 }
 
+.input-wrapper label {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 11px;
+  color: #666;
+}
+
 .input-wrapper input {
   width: 100%;
   box-sizing: border-box;
-}
-
-.input-wrapper label {
-  display: block;
-  margin-bottom: 4px;
+  margin: 0;
 }
 
 @media (min-width: 768px) {
-  .person-row {
-    grid-template-columns: 100px 1fr;
-  }
-  
   .inputs-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 767px) {
-  .person-row {
-    grid-template-columns: 1fr;
-  }
-  
   .inputs-container {
     grid-template-columns: 1fr;
   }
+}
+
+#itemList {
+  margin: 15px 0;
+}
+
+#receiptTotalDisplay {
+  margin-top: 15px;
+  font-weight: 600;
+  color: #003c83;
+}
+
+#selectionSection {
+  transition: opacity 0.3s;
+}
+
+#selectionArea {
+  margin: 15px 0;
+}
+
+#results {
+  min-height: 50px;
 } 

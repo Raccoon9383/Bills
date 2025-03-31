@@ -18,7 +18,7 @@
     <h2>SplitMate</h2>
 
     <div class="section">
-      <label>📦 1단계: 영수증 항목 입력</label><br />
+      <label class="section-title">📦 1단계: 영수증 항목 입력</label>
       <input type="text" id="itemName" placeholder="항목명 (예: 치킨, 소주)" />
       <input type="number" id="itemCount" placeholder="수량" />
       <input type="number" id="itemPrice" placeholder="개당 가격" />
@@ -28,14 +28,14 @@
     </div>
 
     <div class="section">
-      <label>👥 2단계: 참여자 이름 입력</label><br />
+      <label class="section-title">👥 2단계: 참여자 이름 입력</label>
       <input type="text" id="personName" placeholder="이름" />
       <button onclick="addPerson()">이름 추가</button>
       <div id="personList"></div>
     </div>
 
     <div class="section" id="selectionSection" style="display: none">
-      <label>✅ 3단계: 각자 먹은 항목 수량 입력</label>
+      <label class="section-title">✅ 3단계: 각자 먹은 항목 수량 입력</label>
       <div id="selectionArea"></div>
       <button onclick="calculate()">정산 완료</button>
     </div>

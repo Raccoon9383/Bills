@@ -30,9 +30,12 @@ function updateItemList() {
   list.innerHTML = items
     .map(
       (item, i) =>
-        `<div class="item">${item.name} - ${item.count}개 × ₩${formatNumber(
-          item.price
-        )} <button class="remove-btn" onclick="removeItem(${i})">×</button></div>`
+        `<div class="item">
+          <span class="item-name">${item.name}</span>
+          <span class="item-count">${item.count}개</span>
+          <span class="item-price">₩${formatNumber(item.price)}</span>
+          <button class="remove-btn" onclick="removeItem(${i})">×</button>
+        </div>`
     )
     .join("");
   updateReceiptTotal();
@@ -100,14 +103,13 @@ function renderSelectionArea() {
       const inputWrapper = document.createElement("div");
       inputWrapper.className = "input-wrapper";
 
-      //   const itemLabel = document.createElement("label");
-      //   itemLabel.textContent = item.name;
-      //   inputWrapper.appendChild(itemLabel);
+      const itemLabel = document.createElement("label");
+      itemLabel.textContent = item.name;
+      inputWrapper.appendChild(itemLabel);
 
       const input = document.createElement("input");
       input.type = "number";
       input.min = "0";
-      input.placeholder = item.name;
       input.oninput = (e) => {
         const val = parseInt(e.target.value);
         if (!isNaN(val) && val > 0) person.consumed[item.name] = val;
