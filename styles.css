@@ -7,12 +7,12 @@ body {
 }
 
 h2 {
-  text-align: center;
-  font-size: 2.2rem;
+  font-family: 'Gowun Dodum', sans-serif;
+  font-weight: bold;
   color: #003c83;
+  font-size: 2.5rem;
+  text-align: center;
   margin-bottom: 20px;
-  font-weight: 700;
-  font-family: 'Chosunilbo_myungjo', serif;
 }
 
 .section {
@@ -173,6 +173,13 @@ button:hover {
   width: 100%;
   box-sizing: border-box;
   margin: 0;
+}
+
+.sub-items {
+  font-size: 0.85rem;
+  color: #000000;
+  display: block;
+  margin-bottom: 10px;
 }
 
 @media (min-width: 768px) {

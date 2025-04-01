@@ -162,7 +162,7 @@ function calculate() {
       totals[consumer.name] += personShare;
       calculatedTotal += personShare;
       const fraction = toFraction(consumer.qty, totalConsumedQty);
-      consumedItems[consumer.name].push(`${item.name}${fraction === '' ? '' : ' x '}${fraction}`);
+      consumedItems[consumer.name].push(`${item.name}${fraction === '' ? '' : ' x'}${fraction}`);
     }
   }
   const receiptTotal = items.reduce(
@@ -170,19 +170,20 @@ function calculate() {
     0
   );
   const resultLines = [
-    `✅ 정산 결과 (총액: ₩${formatNumber(
+    `✅ 정산 결과 <br><span class="sub-items">(총액: ₩${formatNumber(
       Math.round(calculatedTotal)
-    )} / 영수증 총액: ₩${formatNumber(receiptTotal)})\n`,
+    )} / 영수증 총액: ₩${formatNumber(receiptTotal)})</span><br><br>`,
   ];
+  
   for (const name in totals) {
     const itemsList = consumedItems[name].join(", ");
     resultLines.push(
-      `${name}: ₩${formatNumber(Math.round(totals[name]))} (${itemsList})`
+      `${name}: ₩${formatNumber(Math.round(totals[name]))}<br><span class="sub-items">(${itemsList})</span><br>`
     );
   }
   resultLines.push("\n👥 항목별 인원");
   for (const item in itemConsumers) {
     resultLines.push(`${item}: ${itemConsumers[item].join(", ")}`);
   }
-  document.getElementById("results").textContent = resultLines.join("\n");
+  document.getElementById("results").innerHTML = resultLines.join("\n");
 }
