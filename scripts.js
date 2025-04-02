@@ -178,7 +178,7 @@ function calculate() {
   for (const name in totals) {
     const itemsList = consumedItems[name].join(", ");
     resultLines.push(
-      `${name}: ₩${formatNumber(Math.round(totals[name]))}<br><span class="sub-items">(${itemsList})</span><br>`
+      `${name}: ₩${formatNumber(Math.round(totals[name]))}<br><span class="sub-items">(${itemsList})</span>`
     );
   }
   resultLines.push("\n👥 항목별 인원");
