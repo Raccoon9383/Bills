@@ -172,7 +172,7 @@ function calculate() {
   const resultLines = [
     `✅ 정산 결과 <br><span class="sub-items">(총액: ₩${formatNumber(
       Math.round(calculatedTotal)
-    )} / 영수증 총액: ₩${formatNumber(receiptTotal)})</span><br><br>`,
+    )} / 영수증 총액: ₩${formatNumber(receiptTotal)})</span>`,
   ];
   
   for (const name in totals) {
