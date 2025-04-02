@@ -177,9 +177,9 @@ button:hover {
 
 .sub-items {
   font-size: 0.85rem;
-  color: #000000;
+  color: #a6a6a6;
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: -5px;
 }
 
 @media (min-width: 768px) {
